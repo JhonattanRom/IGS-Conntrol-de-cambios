@@ -1,0 +1,51 @@
+<mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Datos de la tarea</mat-card-title>
+    <mat-card-content>
+      <form #updateTareaForm="ngForm">
+        <mat-form-field>
+          	<input
+                  matInput
+                  placeholder="Nombre de la tarea"
+                  required
+                  name="Nombre_Tarea"
+                  ngModel
+                  #Nombre_Tarea="ngModel"
+                  [(ngModel)]="tarea.Nombre_Tarea"
+                  >
+        	<mat-error *ngIf="Nombre_Tarea.invalid">Se requiere un nombre para el cargo</mat-error>
+        </mat-form-field>
+		<mat-form-field class="example-full-width">
+		    <textarea 
+            matInput
+            required 
+            placeholder="Descripcion de la tarea"
+            name = 'Descripcion_Tarea'
+            #Descripcion_Tarea="ngModel"
+            [(ngModel)]="tarea.Descripcion_Tarea">            
+        </textarea>
+		</mat-form-field>
+<!--Id_Cargo_Usuario del usuario-->
+		<mat-form-field>
+            <mat-label>Seleccione un encargado</mat-label>
+            <mat-select [(ngModel)]="tarea.ID_Encargado" name="encargado" [(value)]="selectedEncargado" required>
+                <mat-option  [value]="">
+                     ...
+                </mat-option>
+                <mat-option *ngFor="let encargado of encargados" [value]="encargado.Id_Usuario">
+                    {{encargado.Nombre_Usuario}} {{encargado.Apellido_Usuario}} {{encargado.Cedula_Usuario}} ({{encargado.Correo_Usuario}})
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="ID_Encargado.hasError('required')">Seleccione un encargado</mat-error>
+            <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+        <button (click)="ClickAlert()"
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Registrar servicio
+        </button>
+      </form>
+    </mat-card-content>
+</mat-card>     
+
+

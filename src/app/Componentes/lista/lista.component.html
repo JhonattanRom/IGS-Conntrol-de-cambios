@@ -1,0 +1,43 @@
+<!--
+<div *ngIf="activated">
+	<ul>
+		<app-usuario *ngFor="let user of users" [UserName]= "user"></app-usuario>
+	</ul>
+	<p>Nombre:{{nombre}}</p>
+	<p>Apelido:{{apellido}}</p>
+	<p>Direccion:{{direccion.pais}}-{{direccion.estado}}-{{direccion.pueblo}}</p>
+	<h5>Juegos:</h5>
+	<ul>
+		<li *ngFor="let juego of juegos">  {{juego}}</li>
+	</ul>
+</div>
+-->
+
+<form (submit)="AddUser(newUser)">
+	<input type="text" name="" #newUser>
+	<button>Submit</button>
+</form>
+
+
+<ul>
+	<li *ngFor= "let user of users"> {{user}} 
+		<button (click) = "SayHello(user)">
+			Click ME!!
+		</button>
+		<button (click) = "Delete(user)">
+			X
+		</button>
+	</li>
+</ul>
+
+<div>
+	<form>
+		<input type="text" name="name" [(ngModel)] = "nombre">
+		<input type="text" name="age" [(ngModel)] = "edad">
+	</form>
+	<p>	nombre: {{nombre}}</p>
+	<p>	edad: {{edad}}</p>
+</div>
+
+
+<hr>

@@ -1,0 +1,157 @@
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+.tablita{
+  width: 95%;
+  margin:  auto;
+  text-align:justify;
+}
+.hi {
+  width: 95%;
+  margin:  auto;
+  text-align:center;
+  margin-top: 30px
+}
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #777;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.
+}
+
+.encabezado{
+  background-color: #689F38;
+}
+.header{
+  text-align: center;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;  
+}
+
+.filtros{
+  width: 100%;
+  margin:  auto;
+}
+a {
+  margin-right: 2px
+}
+.example-button {
+  margin-top: 16px;
+}
+
+.example-tooltip-red {
+  background: #b71c1c;
+}
+table th {
+  text-align: center;
+}
+table tr {
+  text-align: center;
+}
+.agregar{
+  align-items: 
+}
+mat-grid-list{
+  width: 90%;
+  margin:  auto;
+  text-align:right;
+  
+}
+.selector{
+  margin-left: 25px
+}
+.btnPlus{
+  margin-left: 30px;
+}
+.example-stretched-tabs {
+  max-width: 100%;
+}
+.mat-list-base .mat-list-item {
+    font-size: 14px;
+    line-height: 14px;
+}
+mat-grid-list[_ngcontent-tnk-c9] {
+    width: 90%;
+    margin: auto;
+    text-align: justify;
+}
+
+mat-card {
+  width: 70%;
+  margin: 2% auto;
+  border-radius: 8px;
+}
+mat-form-field, mat-checkbox {
+  width: 80%;
+  display: block;
+  margin: auto;
+}
+mat-card-content {
+  margin-top: 20px;
+}
+.app-container header {
+          height: 50px;
+          max-height: 50px;
+          box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
+                      0 6px 10px 0 rgba(0,0,0,.14), 
+                      0 1px 18px 0 rgba(0,0,0,.12);
+}
+.app-container .content-container {
+          height: calc( 100% - 50px);
+          overflow: auto;
+          padding: 10px;
+          word-break: break-all;
+}
+.hi {
+  width: 100%;
+  margin:  auto;
+  text-align:center;
+}
+mat-toolbar {
+          height: 100% !important;
+}  

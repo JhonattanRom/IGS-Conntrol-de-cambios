@@ -1,0 +1,49 @@
+.mat-card {
+	width: 90%;
+	margin:  auto;
+    text-align:justify;
+    margin-top: 5px;
+    
+
+}
+.Descripcion{
+	margin-top: 20px;
+}
+
+.carta {
+	width: 90%
+}
+.comentario-w{
+	width: 60%
+}
+
+.css-tu{
+	margin: auto 0px auto auto ;
+	
+}
+
+.mat-divider {
+  border-top-color: #689F38;
+  height: 5px;
+}
+
+.tu-hr {
+  height: 5px;
+  background-color:  #689F38;
+}
+.otro-hr{
+  height: 5px;
+  background-color: #484848;
+}
+
+.login-button {
+  margin-top: 20px;
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+}
+.full-width{
+  width: 100%;
+  margin: auto;
+  margin-top: 10px;
+}

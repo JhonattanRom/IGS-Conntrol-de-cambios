@@ -1,0 +1,37 @@
+<mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Datos de la Empresa</mat-card-title>
+    <mat-card-content>
+      <form #updateSucursalForm="ngForm">
+        <mat-form-field>
+          	<input
+                  matInput
+                  placeholder="Nombre de la empresa"
+                  required
+                  name="Nombre_empresa"
+                  ngModel
+                  #Nombre_empresa="ngModel"
+                  [(ngModel)]="empresa.Nombre_empresa"
+                  >
+        	<mat-error *ngIf="Nombre_empresa.invalid">Se requiere un nombre para la empresa</mat-error>
+        </mat-form-field>
+		<mat-form-field>
+          	<input
+                  matInput
+                  placeholder="Telefono de la sucursal"
+                  required
+                  name="Rif_empresa"
+                  ngModel
+                  #Rif_empresa="ngModel"
+                  [(ngModel)]="empresa.Rif_empresa"
+                  >
+        	<mat-error *ngIf="Rif_empresa.invalid">Se requiere un rif para la empresa</mat-error>
+        </mat-form-field>
+        <button (click)="ClickAlert()"
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Actualizar Empresa
+        </button>
+      </form>
+    </mat-card-content>
+</mat-card>

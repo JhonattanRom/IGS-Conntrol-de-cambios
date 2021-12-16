@@ -1,0 +1,63 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" color="primary"  fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar  >Menu</mat-toolbar>
+    <mat-nav-list color="primary">
+    
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <!-- This is the tree node template for leaf nodes -->
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding class="arbol" style = "padding-left: 0px;">
+          <!-- use a disabled button to provide padding for tree leaf -->
+          <a style="padding: 0px;" mat-list-item  class="link" routerLink="{{node.link}}"> {{node.name}}<mat-icon mat-list-icon>fast_forward</mat-icon></a>
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+          <button mat-icon-button matTreeNodeToggle
+                  [attr.aria-label]="'toggle ' + node.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          {{node.name}}
+        </mat-tree-node>
+      </mat-tree>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content >
+    <mat-toolbar color="primary" class="mat-elevation-z8">
+      <mat-toolbar-row>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>IGS</span>
+        <span class="example-spacer"></span>
+        <button mat-button (click) ="LogOut()">Log out</button>
+        <button mat-button routerLink="/Home/PerfilUsuario">{{usuario.Correo_Usuario}}<mat-icon mat-list-icon>supervised_user_circle</mat-icon></button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet color="accent"></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<!--
+  <a color="accent" mat-list-item routerLink="/">Home <mat-icon mat-list-icon>supervised_user_circle</mat-icon></a>
+      <a mat-list-item routerLink="/Home/RegistrarUsuario">Registrar Usuario<mat-icon mat-list-icon>folder_shared</mat-icon></a>
+      <a mat-list-item routerLink="/Home/Resumen">Ver Resumen<mat-icon mat-list-icon>assessment</mat-icon></a>
+      <a mat-list-item routerLink="/Home/RegistrarServicio">Registrar Servicio<mat-icon mat-list-icon>assessment</mat-icon></a>
+      <a mat-list-item routerLink="/Home/ListarServicios">Administrar Servicios<mat-icon mat-list-icon>assessment</mat-icon></a>
+      <a mat-list-item routerLink="/Home/RegistrarCargos">Registrar Cargo<mat-icon mat-list-icon>assessment</mat-icon></a>
+      <a mat-list-item routerLink="/Home/ListarCargos">Administrar Cargos<mat-icon mat-list-icon>assessment</mat-icon></a>
+      <a mat-list-item routerLink="/Home/RegistrarEmpresa">Registrar Empresa<mat-icon mat-list-icon>assessment</mat-icon></a>
+      <a mat-list-item routerLink="/Home/ListarEmpresas">Administrar Empresas<mat-icon mat-list-icon>assessment</mat-icon></a>
+      <a mat-list-item routerLink="/Home/ListarUsuarios">Administrar Usuarios<mat-icon mat-list-icon>assessment</mat-icon></a>
+
+-->

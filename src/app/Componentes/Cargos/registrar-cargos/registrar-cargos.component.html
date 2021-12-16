@@ -1,0 +1,48 @@
+<!--
+
+export class Servicio {
+  Id_servicio_app: number;
+  Nombre_servicio: string;
+  Descripcion_servicio: string;
+  Estado_servicio: boolean
+}
+
+
+-->
+
+<mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Registro de Cargos</mat-card-title>
+    <mat-card-content>
+      <form #addCargoForm="ngForm">
+        <mat-form-field>
+            <input
+                  matInput
+                  placeholder="Nombre del cargo"
+                  required
+                  name="Nombre_cargo"
+                  [formControl] = "Nombre_cargo"
+                  >
+          <mat-error
+                    *ngIf="Nombre_cargo.invalid">{{validacionNombreCargo()}}
+                  </mat-error>
+        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <textarea 
+            matInput 
+            placeholder="Descripcion del cargo"
+            name = 'Descripcion_cargo'
+            [formControl] = "Descripcion_cargo">            
+        </textarea>
+         <mat-error
+                    *ngIf="Descripcion_cargo.invalid">{{validacionDescripcion()}}
+                  </mat-error>
+    </mat-form-field>
+        <button (click)="ClickAlert()"
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Registrar cargo
+        </button>
+      </form>
+    </mat-card-content>
+</mat-card>

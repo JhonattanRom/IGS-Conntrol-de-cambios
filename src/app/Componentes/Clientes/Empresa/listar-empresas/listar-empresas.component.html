@@ -1,0 +1,245 @@
+<section class="app-container " >
+       <header>
+           <mat-toolbar color="primary" class="hi">
+              Listado de Clientes
+           </mat-toolbar>
+       </header>
+</section>
+<mat-tab-group animationDuration="2000ms" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z1">
+  <mat-tab label="Empresas">
+  	<mat-grid-list cols="4" rowHeight="70px">
+  <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="1"
+      >
+    <mat-form-field>
+		<!--(keyup)="applyFilter($event.target.value)" evento para el filtro-->
+  		<input matInput 
+  		          name="buscador"
+                  ngModel
+                  
+                  [(ngModel)]="buscador"
+                  (keyup)="applyFilter($event.target.value)" 
+                  placeholder="Buscar ...">
+	</mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="1"
+      [rowspan]="1"
+      class="selector"
+      >
+    <mat-form-field>
+	  <mat-label>Buscar por estado</mat-label>
+	  <mat-select >
+	    <mat-option *ngFor="let estado of estados" [value]="estado.value" (click)="mostrarInputs(estado, $event.target.value)">
+	      {{estado.viewValue}}
+	    </mat-option>
+	  </mat-select>	
+	</mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="1"
+      [rowspan]="1"
+	  class="btnPlus"
+      >
+    
+	  <a mat-mini-fab color="primary"
+	    		matTooltip="Registrar Cliente"
+        		matTooltipPosition="above"
+        		aria-label="Button that displays a tooltip in various positions"
+        		class="agregar"
+        		[routerLink]="['/Home/RegistrarEmpresa']"><mat-icon mat-list-icon>add</mat-icon>
+       </a>
+	
+  </mat-grid-tile>
+</mat-grid-list>
+<!--['Id_Empresa', 'Nombre_empresa', '', 'Estado_empresa', 'Estado_empresa'];-->
+<div class="mat-elevation-z4 tablita">
+<table mat-table [dataSource]="dataSource"  color="primary">
+	  <!--- Note that these columns can be defined in any order.
+	        The actual rendered columns are set as a property on the row definition" -->
+
+	  <!-- ID Column -->
+	  <ng-container matColumnDef="Id_Empresa">
+	    <th mat-header-cell *matHeaderCellDef class="header">ID </th>
+	    <td mat-cell *matCellDef="let empresa"> {{empresa.Id_Empresa}} </td>
+	  </ng-container>
+
+	  <!-- Nombre Column -->
+	  <ng-container matColumnDef="Nombre_empresa">
+	    <th mat-header-cell *matHeaderCellDef class="header">Nombre </th>
+	    <td mat-cell *matCellDef="let empresa"> {{empresa.Nombre_empresa}} </td>
+	  </ng-container>
+
+	  <!-- Descripcion Column -->
+	  <ng-container matColumnDef="Rif_empresa">
+	    <th mat-header-cell *matHeaderCellDef class="header">Rif </th>
+	    <td mat-cell *matCellDef="let empresa"> {{empresa.Rif_empresa}} </td>
+	  </ng-container>
+
+	  <!-- Estatus Column -->
+	  <ng-container matColumnDef="Estado_empresa">
+	    <th mat-header-cell *matHeaderCellDef class="header">Estado </th>
+	    <td mat-cell *matCellDef="let empresa">
+	    	<!--Aqui esta en if else de habilitacion de servicios-->
+	    	<p *ngIf = "empresa.Estado_empresa; else No">Habilitado</p>
+	    	<!--{{serv.Estado_servicio}}-->
+	    	<ng-template #No>
+				<p>Deshabilitado</p> 
+			</ng-template> 
+	    </td>
+	    
+	  </ng-container>
+
+	  <!--Opciones Column-->
+	  <ng-container matColumnDef="Opciones" >
+	    <th mat-header-cell *matHeaderCellDef class="header">Opciones </th>
+	    <td mat-cell *matCellDef="let empresa"> 
+	    	<a mat-mini-fab color="accent" [routerLink]="['/Home/DatosEmpresa', empresa.Id_Empresa]" style="color:white"
+	    		matTooltip="Actualizar empresa"
+        		matTooltipPosition="above"
+        		aria-label="Button that displays a tooltip in various positions">
+				<mat-icon mat-list-icon>edit</mat-icon>
+			</a>
+	    		<!--Aqui esta en if else de habilitacion de servicios-->
+	    	<a mat-mini-fab color="warn" *ngIf = "empresa.Estado_empresa; else Nobtn"
+	    		matTooltip="Deshabilitar empresa"
+	    	    (click) = "ClickAlertCliente(empresa.Estado_empresa, empresa.Id_Empresa)"
+        		matTooltipPosition="above"
+        		aria-label="Button that displays a tooltip in various positions">
+        		<mat-icon mat-list-icon>clear</mat-icon>
+        	</a>
+	    	<a mat-mini-fab color="primary" *ngIf = "!empresa.Estado_empresa" #Nobtn
+	    		matTooltip="Habilitar empresa"
+        		matTooltipPosition="above"
+        		(click) = "ClickAlertCliente(empresa.Estado_empresa, empresa.Id_Empresa)"
+        		aria-label="Button that displays a tooltip in various positions"><mat-icon mat-list-icon>done</mat-icon>
+        	</a>
+        	<a mat-mini-fab color="accent" [routerLink]="['/Home/RegistrarSucursal', empresa.Id_Empresa]" style="color:white"
+	    		matTooltip="Registrar Sucursal"
+        		matTooltipPosition="above"
+        		aria-label="Button that displays a tooltip in various positions">
+				<mat-icon mat-list-icon>style</mat-icon>
+			</a>	
+	    </td>
+	  </ng-container>
+
+	  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="encabezado"></tr>
+	  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr></table>
+
+
+		<mat-paginator class="paginacion"[pageSizeOptions]="[1,3, 5]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+  </mat-tab>
+    <mat-tab label="Sucursales">
+  	<mat-grid-list cols="4" rowHeight="70px">
+  <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="1"
+      >
+     <mat-form-field>
+		<!--(keyup)="applyFilter($event.target.value)" evento para el filtro-->
+  		<input matInput 
+  		          name="buscador1"
+                  ngModel
+                  
+                  [(ngModel)]="buscador1"
+                  (keyup)="applyFilter1($event.target.value)" 
+                  placeholder="Buscar ...">
+	</mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="1"
+      [rowspan]="1"
+      class="selector"
+      >
+    <mat-form-field>
+	  <mat-label>Buscar por estado</mat-label>
+	  <mat-select >
+	    <mat-option *ngFor="let estado of estados" [value]="estado.value" (click)="mostrarInputs1(estado, $event.target.value)">
+	      {{estado.viewValue}}
+	    </mat-option>
+	  </mat-select>	
+	</mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+<!-- ['Id_sucursal', 'Nombre_sucursal', 'Id_empresa', 'Telefono_sucursal', "Estado_sucursal", 'Opciones'];
+	-->
+<div class="mat-elevation-z4 tablita">
+<table mat-table [dataSource]="dataSource1"  color="primary">
+	  <!--- Note that these columns can be defined in any order.
+	        The actual rendered columns are set as a property on the row definition" -->
+
+	  <!-- ID Column -->
+	  <ng-container matColumnDef="Id_sucursal">
+	    <th mat-header-cell *matHeaderCellDef class="header">ID </th>
+	    <td mat-cell *matCellDef="let sucursal"> {{sucursal.Id_sucursal}} </td>
+	  </ng-container>
+
+	  <!-- Nombre Column -->
+	  <ng-container matColumnDef="Nombre_sucursal">
+	    <th mat-header-cell *matHeaderCellDef class="header">Nombre </th>
+	    <td mat-cell *matCellDef="let sucursal"> {{sucursal.Nombre_sucursal}} </td>
+	  </ng-container>
+
+	  <!-- Descripcion Column -->
+	  <ng-container matColumnDef="Id_empresa">
+	    <th mat-header-cell *matHeaderCellDef class="header">Empresa</th>
+	    <td mat-cell *matCellDef="let sucursal"> {{sucursal.empresas.Nombre_empresa}} </td>
+	  </ng-container>
+
+	  <!-- Tlf Column -->
+	  <ng-container matColumnDef="Telefono_sucursal">
+	    <th mat-header-cell *matHeaderCellDef class="header">Telefono </th>
+	    <td mat-cell *matCellDef="let sucursal"> {{sucursal.Telefono_sucursal}} </td>
+	  </ng-container>
+
+	  <!-- Estatus Column -->
+	  <ng-container matColumnDef="Estado_sucursal">
+	    <th mat-header-cell *matHeaderCellDef class="header">Estado </th>
+	    <td mat-cell *matCellDef="let sucursal">
+	    	<!--Aqui esta en if else de habilitacion de servicios-->
+	    	<p *ngIf = "sucursal.Estado_sucursal; else No">Habilitado</p>
+	    	<!--{{serv.Estado_servicio}}-->
+	    	<ng-template #No>
+				<p>Deshabilitado</p> 
+			</ng-template> 
+	    </td>
+	    
+	  </ng-container>
+
+	  <!--Opciones Column-->
+	  <ng-container matColumnDef="Opciones" >
+	    <th mat-header-cell *matHeaderCellDef class="header">Opciones </th>
+	    <td mat-cell *matCellDef="let sucursal"> 
+	    	<a mat-mini-fab color="accent" [routerLink]="['/Home/ActualizarSucursal', sucursal.Id_sucursal]" style="color:white"
+	    		matTooltip="Actualizar sucursal"
+        		matTooltipPosition="above"
+        		aria-label="Button that displays a tooltip in various positions">
+				<mat-icon mat-list-icon>edit</mat-icon>
+			</a>
+	    		<!--Aqui esta en if else de habilitacion de suscursales-->
+	    	<a mat-mini-fab color="warn" *ngIf = "sucursal.Estado_sucursal; else Nobtn"
+	    		matTooltip="Deshabilitar sucursal"
+                (click) = "ClickAlert(sucursal.Estado_sucursal, sucursal.Id_sucursal)"
+        		matTooltipPosition="above"
+        		aria-label="Button that displays a tooltip in various positions">
+        		<mat-icon mat-list-icon>clear</mat-icon>
+        	</a>
+	    	<a mat-mini-fab color="primary" *ngIf = "!sucursal.Estado_sucursal" #Nobtn
+	    		matTooltip="Habilitar sucursal"
+	    		(click) = "ClickAlert(sucursal.Estado_sucursal, sucursal.Id_sucursal)"
+        		matTooltipPosition="above"
+        		aria-label="Button that displays a tooltip in various positions"><mat-icon mat-list-icon>done</mat-icon>
+        	</a>
+	    </td>
+	  </ng-container>
+
+	  <tr mat-header-row *matHeaderRowDef="displayedColumns1" class="encabezado"></tr>
+	  <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr></table>
+	  <mat-paginator #SucursalPaginator class="paginacion"[pageSizeOptions]="[1,3, 5]" showFirstLastButtons></mat-paginator>
+    </div>
+  </mat-tab>
+</mat-tab-group>

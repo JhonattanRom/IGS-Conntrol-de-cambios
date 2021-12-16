@@ -1,0 +1,69 @@
+<mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Solicitud de control de cambio</mat-card-title>
+    <mat-card-content>
+      <form #addControlCambioForm="ngForm">
+        <mat-form-field>
+          	<input
+                  matInput
+                  placeholder="Nombre del Control d cambio"
+                  required
+                  name="Nombre_Control_Cambio"
+                  ngModel
+                  #Nombre_Control_Cambio="ngModel"
+                  [(ngModel)]="controlCambio.Nombre_Control_Cambio"
+                  >
+        	<mat-error *ngIf="Nombre_Control_Cambio.invalid">Se requiere un nombre para el control de cambio</mat-error>
+        </mat-form-field>
+		<mat-form-field class="example-full-width">
+		    <textarea 
+            matInput 
+            placeholder="Descripcion del control d cambio"
+            name = 'Descripcion_Control_Cambio'
+            #Descripcion_Control_Cambio="ngModel"
+            [(ngModel)]="controlCambio.Descripcion_Control_Cambio">            
+        ></textarea>
+		</mat-form-field>
+<!--Nivel de prioridad-->
+    <mat-form-field>
+      <mat-label>Seleccione un nivel de prioridad</mat-label>
+      <mat-select [(ngModel)]="controlCambio.Prioridad_CC" name="prioridad" required>
+        <mat-option  [value]="">
+          ...
+        </mat-option>
+        <mat-option *ngFor="let prioridad of prioridades" [value]="prioridad.Id_prioridad">
+          {{prioridad.Nombre_Prioridad}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="Id_prioridad.hasError('required')">Seleccione un nivel de prioridad para el control de cambio</mat-error>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+<!--Servicio-->
+    <mat-form-field>
+      <mat-label>Seleccione un servicio</mat-label>
+      <mat-select [(ngModel)]="controlCambio.Id_servicio" name="servicio" required>
+        <mat-option  [value]="">
+          ...
+        </mat-option>
+        <mat-option *ngFor="let servicio of servicios" [value]="servicio.Id_servicio_app">
+          {{servicio.Nombre_servicio}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="Id_servicio_app.hasError('required')">Seleccione un nivel de prioridad para el control de cambio</mat-error>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="controlCambio.Fecha_Solicitud" name="fecha_Solicitud" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Seleccione la fecha de solicitud">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button (click)="UpdateControlCambio()"
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Actualizar control de cambio
+    </button>
+      </form>
+    </mat-card-content>
+</mat-card>
+
+

@@ -1,0 +1,89 @@
+<!--Filtro de busqueda controles de cambio-->
+<mat-card class="mat-elevation-z12">
+  <mat-card-title style="text-align:center;">Crear reporte</mat-card-title>
+  <mat-card-content>
+    <form class="example-form" [formGroup]="firstFormGroup">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Empleado</mat-label>
+              <mat-select (ngModel)="personal" name="personal" [(value)]="selectedEncargado" formControlName="Personal"  required>
+                <mat-option  [value]="">
+                     ...
+                </mat-option>
+                <mat-option *ngFor="let persana of personal" [value]="persana.Id_Usuario">
+                    {{persana.Nombre_Usuario}} {{persana.Apellido_Usuario}} {{persana.Cedula_Usuario}} ({{persana.Correo_Usuario}})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+
+<!--Rol en el control de cambio-->
+            <mat-form-field>
+              <mat-label>Seleccione un cargo</mat-label>
+              <mat-select  mat-select required formControlName="RolCC">
+               <mat-option  value="all">
+                          Todos los roles del control de cambio
+                </mat-option>
+                <mat-option  value="Id_solicitante">
+                          Solicitante
+                </mat-option>
+                <mat-option  value="Id_evaluador">
+                          Evaluador
+                </mat-option>
+                <mat-option  value="Id_verificador">
+                          Verificador
+                </mat-option>
+                <mat-option  value="Id_administrador">
+                          Administrador
+                </mat-option>
+                <mat-option  value="Id_responsable">
+                          Responsable
+                </mat-option>
+              </mat-select>
+              <!--<mat-error *ngIf="Id_Cargo_Usuario.invalid">Seleccione un rol en el control de cambio</mat-error>-->
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <!--Seleccion de fecha de Inicio-->
+            <mat-form-field class="example-full-width">
+              <input matInput name="Fecha_Inicio" matInput   [matDatepicker]="Fecha_Inicio" placeholder="Seleccione la fecha de Inicio" required formControlName="fechaInicioCtrl" >
+              
+              <mat-datepicker-toggle matSuffix [for]="Fecha_Inicio"></mat-datepicker-toggle>
+              <mat-datepicker #Fecha_Inicio   ></mat-datepicker>
+
+            </mat-form-field>
+          </td>
+          <td>
+<!--Rol en el control de cambio-->
+            <mat-form-field>
+             <input  matInput  name="Fecha_Final" matInput 
+               [matDatepicker]="picker" placeholder="Seleccione la fecha de Finalizacion"  formControlName="fechaFinalCtrl" >
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker ></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <button 
+        mat-mini-fab 
+        color="primary"
+        matTooltip="Crear reporte"
+        matTooltipPosition="above"
+        aria-label="Button that displays a tooltip in various positions"
+        class="agregar"
+        (click) = " testeoExport()">
+        <mat-icon mat-list-icon>trending_down</mat-icon>
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>  
+
+<h1>'2019-01-21 00:00:00-00'  AND  '2019-12-17 00:00:00-00 '</h1>

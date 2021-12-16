@@ -1,0 +1,120 @@
+<section class="app-container " >
+       <header>
+           <mat-toolbar  color="primary" class="hi" *ngIf="tareas.length > 0; else NoTareas">
+              Listado de Tareas Personales
+           </mat-toolbar>
+           <mat-toolbar  color="primary" class="hi" *ngIf="tareas.length == 0" #NoTareas>
+              Listado de Tareas Personales. Sin tareas
+           </mat-toolbar>
+       </header>
+</section>
+<mat-grid-list cols="4" rowHeight="70px">
+  <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="1"
+      >
+    <mat-form-field>
+		<!--(keyup)="applyFilter($event.target.value)" evento para el filtro-->
+  		<input matInput 
+  		          name="buscador"
+                  ngModel
+                  
+                  [(ngModel)]="buscador"
+                  (keyup)="applyFilter($event.target.value)" 
+                  placeholder="Buscar ...">
+	</mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="1"
+      [rowspan]="1"
+      class="selector"
+      >
+    <mat-form-field>
+	  <mat-label>Buscar por estado</mat-label>
+	  <mat-select>
+	   <mat-option *ngFor="let estado of estados" [value]="estado.value" (click)="mostrarInputs(estado, $event.target.value)">
+	      {{estado.viewValue}}
+	    </mat-option>
+	  </mat-select>	
+	</mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<div class="mat-elevation-z4 tablita">
+<table mat-table [dataSource]="dataSource"  color="primary">
+	  <!--- Note that these columns can be defined in any order.
+	        The actual rendered columns are set as a property on the row definition" -->
+
+	  <!-- ID Column -->
+	  <ng-container matColumnDef="ID_Tarea">
+	    <th mat-header-cell *matHeaderCellDef class="header">Ticket</th>
+	    <td mat-cell *matCellDef="let tarea"> {{tarea.ID_Tarea}} </td>
+	  </ng-container>
+
+	  <!-- Nombre Column -->
+	  <ng-container matColumnDef="Nombre_Tarea">
+	    <th mat-header-cell *matHeaderCellDef class="header">Nombre </th>
+	    <td mat-cell *matCellDef="let tarea"> {{tarea.Nombre_Tarea}} </td>
+	  </ng-container>
+
+	  <!-- Descripcion Column -->
+	  <ng-container matColumnDef="Descripcion_Tarea">
+	    <th mat-header-cell *matHeaderCellDef class="header">Descripcion </th>
+	    <td mat-cell *matCellDef="let tarea"> {{tarea.Descripcion_Tarea}} </td>
+	  </ng-container>
+
+	  <!-- Descripcion Column -->
+	  <ng-container matColumnDef="ID_Encargado">
+	    <th mat-header-cell *matHeaderCellDef class="header" 
+        >Encargado </th>
+	    <td mat-cell *matCellDef="let tarea" 
+	    matTooltip="{{tarea.encargados.Nombre_Usuario}} 
+	    			{{tarea.encargados.Apellido_Usuario }}
+	    			{{tarea.encargados.Cedula_Usuario}}" 
+	    			[matTooltipPosition]="position.value"> 
+	    		{{tarea.Encargado}} </td>
+	  </ng-container>
+	  <!-- Estatus Column -->
+	  <ng-container matColumnDef="Estado_Tarea">
+	    <th mat-header-cell *matHeaderCellDef class="header">Estado </th>
+	    <td mat-cell *matCellDef="let tarea">
+	    	<!--Aqui esta en if else de habilitacion de servicios-->
+	    	<p *ngIf = "tarea.Estado_Tarea; else No">Terminada</p>
+	    	<!--{{serv.Estado_servicio}}-->
+	    	<ng-template #No>
+				<p>Incompleta</p> 
+			</ng-template> 
+	    </td>
+	    
+	  </ng-container>
+
+	  <!--Opciones Column-->
+	  <ng-container matColumnDef="Opciones" >
+	    <th mat-header-cell *matHeaderCellDef class="header">Opciones </th>
+	    <td mat-cell *matCellDef="let tarea"> 
+			<!--Solo para tareas incompletas-->
+			<a mat-mini-fab color="primary"  *ngIf ="!tarea.Estado_Tarea" 
+				(click) = "ClickAlert(tarea.ID_Tarea)" 
+				style="color:white"
+		    	matTooltip="Completar tarea"
+	        	matTooltipPosition="above"
+	        	aria-label="Button that displays a tooltip in various positions">
+        		<mat-icon mat-list-icon>done</mat-icon>
+        	</a>
+        	<!--Para observar los comentarios de dicha tarea-->
+        	<a mat-mini-fab color="primary"  
+				[routerLink]="['/Home/Comentarios/Tarea/', tarea.ID_Tarea]" 
+				style="color:white"
+		    	matTooltip="Observar comentarios de la tarea"
+	        	matTooltipPosition="above"
+	        	aria-label="Button that displays a tooltip in various positions">
+        		<mat-icon mat-list-icon>chat</mat-icon>
+        	</a>
+	    </td>
+	  </ng-container>
+
+	  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="encabezado"></tr>
+	  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr></table>
+
+<mat-paginator class="paginacion"[pageSizeOptions]="[3, 5]" showFirstLastButtons></mat-paginator>
+</div>

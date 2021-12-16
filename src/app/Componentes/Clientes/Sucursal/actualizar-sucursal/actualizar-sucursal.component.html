@@ -1,0 +1,37 @@
+<mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Datos de la Sucursal</mat-card-title>
+    <mat-card-content>
+      <form #updateSucursalForm="ngForm">
+        <mat-form-field>
+          	<input
+                  matInput
+                  placeholder="Nombre del cargo"
+                  required
+                  name="Nombre_sucursal"
+                  ngModel
+                  #Nombre_sucursal="ngModel"
+                  [(ngModel)]="sucursal.Nombre_sucursal"
+                  >
+        	<mat-error *ngIf="Nombre_sucursal.invalid">Se requiere un nombre para el cargo</mat-error>
+        </mat-form-field>
+		<mat-form-field>
+          	<input
+                  matInput
+                  placeholder="Telefono de la sucursal"
+                  required
+                  name="Telefono_sucursal"
+                  ngModel
+                  #Telefono_sucursal="ngModel"
+                  [(ngModel)]="sucursal.Telefono_sucursal"
+                  >
+        	<mat-error *ngIf="Telefono_sucursal.invalid">Se requiere un tlf para la sucursal</mat-error>
+        </mat-form-field>
+        <button (click)="ClickAlert()"
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Actualizar Sucursal
+        </button>
+      </form>
+    </mat-card-content>
+</mat-card>

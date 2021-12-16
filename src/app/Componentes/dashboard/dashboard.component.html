@@ -1,0 +1,99 @@
+<!--<section class="mat-h1, mat-headline tablita ">
+  <h1 class="hi">Resumen</h1>
+</section>-->
+    <section class="app-container" >
+       <header>
+           <mat-toolbar color="primary" class="hi">
+              Resumen
+           </mat-toolbar>
+       </header>
+    </section>
+<div class="grid-container">
+  <mat-grid-list cols="3" rowHeight="300px" >
+      <mat-card class="dashboard-card" >
+        <mat-card-title style="text-align:center;" class ="carta" >Resultados</mat-card-title>
+        <mat-card-content  >
+          <div class="card-list" >
+            <mat-grid-tile  [colspan]="1" [rowspan]="1">
+            <div class="card blue">
+              <div class="title" style="text-align:center; float: left;">Controles de cambio terminados<mat-icon mat-list-icon>edit</mat-icon></div>
+              <p>
+              </p>
+              <div *ngIf="ContadorArray.length > 0" class="value">{{ContadorArray[6].contador}}</div>
+            </div>
+            </mat-grid-tile>
+            <mat-grid-tile  [colspan]="1" [rowspan]="1">
+            <div class="card orange" >
+              <div class="title" style="text-align:center; float: left;">Controles de cambio planificados<mat-icon mat-list-icon>edit</mat-icon></div>
+              <p>
+              </p>
+               <div *ngIf="ContadorArray.length > 0" class="value">{{ContadorArray[3].contador}}</div>
+            </div>
+            </mat-grid-tile>
+            <mat-grid-tile  [colspan]="1" [rowspan]="1">
+            <div class="card red" >
+              <div class="title" style="text-align:center; float: left;">Controles de cambio por ejecutar<mat-icon mat-list-icon>edit</mat-icon></div>
+              <p>
+              </p>
+              <div *ngIf="ContadorArray.length > 0" class="value">{{ContadorArray[4].contador}}</div>
+            </div>
+          </mat-grid-tile>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      </mat-grid-list>
+
+<!--Top 5 Servicios-->  
+<div class="grid-container">
+    <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile  [colspan]="1" [rowspan]="1" >
+      <mat-card class="dashboard-card">
+        <mat-card-title style="text-align:center;">Top 5 servicios solicitados</mat-card-title>
+        <div>
+          <div style="display: block;" >
+            <canvas baseChart
+            [data]="TortaChartData"
+            [labels]="TortaChartDataChartLabels"
+            [chartType]="TortaChartDataChartType">
+            </canvas>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+<!--Prioridades Total-->
+    <mat-grid-tile  [colspan]="1" [rowspan]="1" >
+      <mat-card class="dashboard-card">
+        <mat-card-title style="text-align:center;">Comparacion entre prioridades</mat-card-title>
+        <div>
+          <div style="display: block;" >
+            <canvas baseChart
+            [data]="PriTortaChartData"
+            [labels]="PriTortaChartDataChartLabels"
+            [chartType]="PriTortaChartDataChartType">
+            </canvas>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+<!--Comparacion entre a:os-->
+    <mat-grid-tile  [colspan]="2" [rowspan]="1" >
+      <mat-card class="dashboard-card">
+      <mat-card-title style="text-align:center;">contadores</mat-card-title>
+        <div>
+          <div style="display: block;" >
+            <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegends"
+            [chartType]="barChartType">
+            </canvas>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+

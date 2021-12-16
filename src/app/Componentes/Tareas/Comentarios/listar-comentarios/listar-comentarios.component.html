@@ -1,0 +1,60 @@
+<mat-card class="mat-elevation-z4 Descripcion carta"  color="primary">
+	<mat-card-header>
+		<mat-card-title *ngIf="tarea.length > 0">
+			Control de Cambio: {{tarea[0].controles.Nombre_Control_Cambio}} <br>
+			Nombre de Tarea: {{tarea[0].Nombre_Tarea}}
+   		 </mat-card-title>
+   		 <mat-card-subtitle *ngIf="tarea.length > 0">Informante: {{tarea[0].informadores.Nombre_Usuario}} {{tarea[0].informadores.Apellido_Usuario}}
+   		 	<br>
+     		                Encargado: {{tarea[0].encargados.Nombre_Usuario}} {{tarea[0].encargados.Apellido_Usuario}}
+         </mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content>
+    <p>
+     {{tarea.Descripcion_Tarea}}
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="carta " ng-style="background-color:  #689F38;">
+	<div  *ngFor="let comentario of Comentarios" [ngClass]="usuario.Id_Usuario === comentario.ID_Encargado ? 'css-tu' : 'css-otros'" class="comentario-w">
+		<mat-card class ="carta mat-elevation-z8" >
+			<mat-card-header >
+				<mat-card-title>
+					  {{comentario.encargados.Nombre_Usuario}} {{comentario.encargados.Apellido_Usuario}}
+		   		 </mat-card-title>
+			</mat-card-header>
+			<hr class="tu-hr" *ngIf="usuario.Id_Usuario === comentario.ID_Encargado; else otro">
+			<ng-template #otro>
+				<hr class="otro-hr"> 
+			</ng-template> 
+			
+			<mat-card-content>
+			    <p>
+			      {{comentario.Comentario}}
+			    </p>
+	  		</mat-card-content>
+		</mat-card>
+	</div>
+	<form #ComentariosForm="ngForm" class="full-width">
+		<mat-form-field class="full-width" >
+		    <textarea 
+            matInput
+            required 
+            placeholder="Comentario"
+            name = 'Comentario'
+            #Comentario="ngModel"
+            [(ngModel)]="Comentarios.Comentario">            
+        </textarea>
+		</mat-form-field>
+	    <button (click)="AddComentarios(Comentario)"
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Comentar
+        </button>
+	</form>
+</mat-card>
+ <!--
+*ngIf = "id === comentario.ID_Encargado; otro"
+ -->

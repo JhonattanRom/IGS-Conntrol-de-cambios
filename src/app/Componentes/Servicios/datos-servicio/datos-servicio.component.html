@@ -1,0 +1,36 @@
+<mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Datos del Servicio</mat-card-title>
+    <mat-card-content>
+      <form #updateServicioForm="ngForm">
+        <mat-form-field>
+          	<input
+                  matInput
+                  placeholder="Nombre de servicio"
+                  required
+                  name="Nombre_servicio"
+                  [formControl] = "Nombre_servicio"
+                  >
+        			<mat-error
+                    *ngIf="Nombre_servicio.invalid">{{validacionNombreServicio()}}
+                  </mat-error>
+        </mat-form-field>
+		<mat-form-field class="example-full-width">
+		    <textarea 
+            matInput
+            required 
+            placeholder="Descripcion del servicio"
+            [formControl] = "Descripcion_servicio">            
+        </textarea>
+         <mat-error
+                    *ngIf="Descripcion_servicio.invalid">{{validacionDescripcion()}}
+                  </mat-error>
+		</mat-form-field>
+        <button (click)="ClickAlert()"
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Actualizar servicio
+        </button>
+      </form>
+    </mat-card-content>
+</mat-card>

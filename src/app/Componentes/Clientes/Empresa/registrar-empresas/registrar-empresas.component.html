@@ -1,0 +1,179 @@
+<!--
+<h2>Registro de Clientes</h2>
+<form (submit)="submit()" [formGroup]="registerForm">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" formControlName="username">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" formControlName="password">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" formControlName="promociones">
+    <label class="form-check-label" for="promociones">Deseo recibir promociones</label>
+  </div>
+
+  <div class="form-group">
+    <a class="btn btn-primary" (click)="agregarTelefono()">Agregar Teléfono</a>
+  </div>
+
+  <div formArrayName="telefonos" *ngFor="let telefono of telefonos.controls; let i = index">
+    <div [formGroupName]="i">
+      <div class="form-group row">
+        <label class="col-md-1" [attr.for]="'telefono' + i">Teléfono</label>
+        <div class="col-md-3">
+          <input type="text" [attr.id]="'telefono' + i" class="form-control" formControlName="telefono">
+        </div>
+        <label class="col-md-1" [attr.for]="'descripcion' + i">Descripción</label>
+        <div class="col-md-5">
+          <input type="text" [attr.id]="'descripcion' + i" class="form-control" formControlName="descripcion">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-danger" (click)="removerTelefono(i)">Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
+removerTelefono
+
+  <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Enviar</button>
+  <button type="button" class="btn btn-default" (click)="refrescar()">Refrescar</button>
+
+</form>
+
+-->
+
+
+
+<mat-card class= "mat-elevation-z12 carta" >
+ <mat-card-title style="text-align:center;" >Registro de clientes
+ </mat-card-title>
+ <mat-card-content>
+	<form  [formGroup]="registerForm" >
+		<mat-form-field>
+			<input 
+				matInput 
+				name="Nombre_empresa"
+				placeholder="Nombre_empresa"
+				formControlName="Nombre_empresa"
+				>
+        <mat-error *ngIf="Nombre_empresa.invalid">Se requiere un nombre para el servicio</mat-error>
+        
+		</mat-form-field>
+		<mat-form-field>
+			<input 
+				matInput 
+				name="Rif_empresa"
+				placeholder="Rif_empresa"
+				formControlName="Rif_empresa"
+				>
+		</mat-form-field>
+     <div formArrayName="sucursales" *ngFor="let sucursale of sucursales.controls; let i = index">
+     
+                 <mat-card-subtitle  style="text-align:center; margin-top: 20px">
+  Sucursal #{{i + 1}}
+         </mat-card-subtitle>
+          <div [formGroupName]="i">
+                <mat-card-content>
+                    <mat-form-field >
+                     <input type="text" [attr.id]="'Nombre_sucursal' + i" class="form-control" matInput  formControlName="Nombre_sucursal" placeholder="Nombre_sucursal">
+                      </mat-form-field>
+                      <mat-form-field >
+                     <input type="text" [attr.id]="'Telefono_sucursal' + i" class="form-control" matInput  formControlName="Telefono_sucursal" placeholder="Telefono">
+                      </mat-form-field>
+                       <mat-card-actions>
+                         <button (click)="removerTelefono(i)"  mat-flat-button color="warn">Remover</button>
+                       </mat-card-actions>
+                </mat-card-content>
+
+          </div>
+           <mat-divider></mat-divider>
+        </div>
+    <div id="destination" #destinationRef ></div>
+        <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile colspan="2">
+            <button (click)="agregarSucursal()"
+                color="accent"
+                mat-raised-button
+                 class="encabezado" 
+                [ngx-scroll-to]="'#destination'"
+                [ngx-scroll-to-offset]="200">
+                Agregar Sucursal
+            </button>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="2">
+            <button (click)="ClickAlert()"
+                mat-raised-button
+                color="primary"
+                [ngx-scroll-to]="'#destination'"
+                [ngx-scroll-to-offset]="200">
+                Registrar Cliente
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+	</form>
+ </mat-card-content>
+</mat-card>
+
+
+
+
+<!--
+<div>
+	<h2>Registro de Clientes</h2>
+	<mat-grid-list cols="2" rowHeight="2:2">
+	  <mat-grid-tile>
+	  	<mat-card class="dashboard-card">
+			<mat-card-header>
+				<mat-card-title>
+					Empresa
+				</mat-card-title>
+			</mat-card-header>
+	  	</mat-card>
+	  	<mat-card-content class="dashboard-card-content">
+	        <div><form #addCargoForm="ngForm">
+        <mat-form-field>
+            <input
+                  matInput
+                  placeholder="Nombre del cargo"
+                  required
+                  name="Nombre_cargo"
+                  >
+          
+        </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <textarea 
+            matInput 
+            placeholder="Descripcion del cargo"
+            name = 'Descripcion_cargo'>            
+        </textarea>
+    </mat-form-field>
+        <button 
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Registrar cargo
+        </button>
+      </form></div>
+	    </mat-card-content>
+	  </mat-grid-tile>
+	<mat-grid-tile>
+	  	<mat-card class="dashboard-card">
+			<mat-card-header>
+				<mat-card-title>
+					Sucursal
+				</mat-card-title>
+			</mat-card-header>
+	  	</mat-card>
+	  	<mat-card-content class="dashboard-card-content">
+	        <div>Sucursal</div>
+	    </mat-card-content>
+	  </mat-grid-tile>
+	</mat-grid-list>
+</div>
+
+
+
+ 
+-->

@@ -1,0 +1,48 @@
+
+
+<mat-card class= "mat-elevation-z12 carta" >
+	<mat-card-title style="text-align:center;" >Registro de Sucursales
+	</mat-card-title>
+	<mat-card-content>
+		<form  [formGroup]="registerForm" >
+			<div formArrayName="sucursales" *ngFor="let sucursale of sucursales.controls; let i = index">
+			  	<mat-card-subtitle  style="text-align:center; margin-top: 20px">
+	  						Sucursal #{{i + 1}}
+	         	</mat-card-subtitle>
+          		<div [formGroupName]="i">
+	                
+	                    <mat-form-field>
+	                     	<input type="text" [attr.id]="'Nombre_sucursal' + i" class="form-control" matInput  formControlName="Nombre_sucursal" placeholder="Nombre_sucursal">
+	                    </mat-form-field>
+	                    <mat-form-field>
+	                     	<input type="text" [attr.id]="'Telefono_sucursal' + i" class="form-control" matInput  formControlName="Telefono_sucursal" placeholder="Telefono">
+	                    </mat-form-field>
+	                    <mat-card-actions>
+	                         <button (click)="removerTelefono(i)"  mat-flat-button color="warn">Remover</button>
+	                    </mat-card-actions>
+            	</div>
+       		</div>
+       		<div id="destination" #destinationRef ></div>
+        <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile colspan="2">
+            <button (click)="agregarSucursal()"
+                mat-raised-button
+                 class="encabezado" 
+                [ngx-scroll-to]="'#destination'"
+                [ngx-scroll-to-offset]="200">
+                Agregar Sucursal
+            </button>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="2">
+            <button (click)="test()"
+                mat-raised-button
+                color="primary"
+                [ngx-scroll-to]="'#destination'"
+                [ngx-scroll-to-offset]="200">
+                Registrar Sucursal
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+		</form>
+	</mat-card-content>
+<mat-card>

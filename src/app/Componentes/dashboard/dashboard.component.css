@@ -1,0 +1,124 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+.tablita{
+  width: 95%;
+  margin:  auto;
+  text-align:justify;
+
+}
+.hi {
+  width: 100%;
+  margin:  auto;
+  text-align:justify;
+}
+.alert-danger {
+    background-color: #f44336; /* Red */
+}
+.alert-success {
+    background-color: #36f456;  
+} 
+.alert{
+    padding: 20px;
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.tu-hr {
+  height: 10px;
+  background-color:  #689F38;
+  margin-bottom: 15px;
+}
+
+.card-list {
+  @include clear();
+  width: 30%;
+}
+.card {
+  border-radius: 8px;
+  color: white;
+  padding: 15px;
+  position: relative;
+  margin-bottom: 10px;
+  height: 139px;
+  }
+.blue {
+    background-color: #2298F1;
+}
+.orange {
+    background-color: #DA932C;
+}
+.red {
+    background-color: #D65B4A;
+}
+.title {
+    display: inline-block;
+    font-size: 12px;
+    padding: 10px 10px 0;
+    text-transform: uppercase;
+  }
+.value {
+    font-size: 28px;
+    padding: 0 10px;
+  }
+
+.mat-divider {
+  width: 80%;
+}
+
+
+
+html, body, .app-container {
+          margin: 0;
+          padding: 0;
+          background-color: #212121; 
+          width: 100%;
+       }
+
+        mat-toolbar {
+          height: 100% !important;
+        }    
+
+        .app-container header {
+          height: 50px;
+          max-height: 50px;
+          box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
+                      0 6px 10px 0 rgba(0,0,0,.14), 
+                      0 1px 18px 0 rgba(0,0,0,.12);
+        }
+        .app-container .content-container {
+          height: calc( 100% - 50px);
+          overflow: auto;
+          padding: 10px;
+          word-break: break-all;
+        }
+.login-page {
+  top: 0;
+  margin: 0;
+  padding: 0;
+
+  display: block;
+  background-color: #E0F2F1;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
